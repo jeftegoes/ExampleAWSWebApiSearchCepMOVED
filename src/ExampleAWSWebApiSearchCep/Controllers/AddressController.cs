@@ -1,6 +1,7 @@
 ﻿using ExampleAWSWebApiSearchCep.Dtos;
 using ExampleAWSWebApiSearchCep.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace ExampleAWSWebApiSearchCep.Controllers;
 
@@ -18,6 +19,15 @@ public class AddressController : ControllerBase
     [HttpGet("{zipCode}")]
     public async Task<IActionResult> Get(string zipCode)
     {
-        return Ok(await _addressService.GetAddress(zipCode));
+        try
+        {
+            return Ok(await _addressService.GetAddress(zipCode));
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(JsonConvert.SerializeObject(ex));
+
+            return Ok();
+        }
     }
 }

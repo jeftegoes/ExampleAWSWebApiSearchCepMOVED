@@ -16,15 +16,19 @@ namespace ExampleAWSWebApiSearchCep.Services
 
         public async Task<EnderecoDto> GetAddress(string zipCode)
         {
+            Console.WriteLine("REQUEST - ZipCode: {0}", zipCode);
+
             using (var client = _httpClientFactory.CreateClient())
             {
                 client.BaseAddress = new Uri("https://viacep.com.br/ws/");
 
                 const string format = "json";
-                
+
                 var url = $"{zipCode}/{format}/";
 
                 var enderecoDto = JsonConvert.DeserializeObject<EnderecoDto>(await client.GetStringAsync(url));
+
+                Console.WriteLine("RESPONSE {0}", JsonConvert.SerializeObject(enderecoDto));
 
                 return enderecoDto;
             }
