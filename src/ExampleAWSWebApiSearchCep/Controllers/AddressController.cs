@@ -19,15 +19,6 @@ public class AddressController : ControllerBase
     [HttpGet("{zipCode}")]
     public async Task<IActionResult> Get(string zipCode)
     {
-        try
-        {
-            return Ok(await _addressService.GetAddress(zipCode));
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(JsonConvert.SerializeObject(ex));
-
-            return Ok();
-        }
+        return Ok(await _addressService.GetAddress(zipCode));
     }
 }
