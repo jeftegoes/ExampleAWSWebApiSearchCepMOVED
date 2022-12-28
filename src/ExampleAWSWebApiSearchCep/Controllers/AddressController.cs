@@ -19,6 +19,10 @@ public class AddressController : ControllerBase
     [HttpGet("{zipCode}")]
     public async Task<IActionResult> Get(string zipCode)
     {
+        var environmentVariable = Environment.GetEnvironmentVariable("dynamo_db");
+
+        Console.WriteLine(environmentVariable);
+
         return Ok(await _addressService.GetAddress(zipCode));
     }
 }
