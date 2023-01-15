@@ -1,6 +1,6 @@
-namespace ExampleAWSWebApiSearchCep.Dtos
+namespace ExampleAWSWebApiSearchCep.Models
 {
-    public class EnderecoDto
+    public class Address
     {
         public string Cep { get; set; } = string.Empty;
         public string Logradouro { get; set; } = string.Empty;

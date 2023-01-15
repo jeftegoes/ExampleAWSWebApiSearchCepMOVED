@@ -1,4 +1,5 @@
-﻿using ExampleAWSWebApiSearchCep.Interfaces;
+﻿using ExampleAWSWebApiSearchCep.Applications;
+using ExampleAWSWebApiSearchCep.Interfaces;
 using ExampleAWSWebApiSearchCep.Services;
 
 namespace ExampleAWSWebApiSearchCep;
@@ -15,9 +16,11 @@ public class Startup
     // This method gets called by the runtime. Use this method to add services to the container
     public void ConfigureServices(IServiceCollection services)
     {
+        services.AddScoped<IAddressApplication, AddressApplication>();
         services.AddScoped<IAddressService, ViaCepService>();
         services.AddHttpClient();
         services.AddControllers();
+        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline

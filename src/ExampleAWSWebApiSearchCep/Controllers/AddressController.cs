@@ -1,28 +1,22 @@
-﻿using ExampleAWSWebApiSearchCep.Dtos;
-using ExampleAWSWebApiSearchCep.Interfaces;
+﻿using ExampleAWSWebApiSearchCep.Interfaces;
+using ExampleAWSWebApiSearchCep.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
 namespace ExampleAWSWebApiSearchCep.Controllers;
 
 [Route("api/[controller]")]
 public class AddressController : ControllerBase
 {
-    private readonly IAddressService _addressService;
+    private readonly IAddressApplication _addressApplication;
 
-    public AddressController(IAddressService addressService)
+    public AddressController(IAddressApplication addressApplication)
     {
-        _addressService = addressService;
+        _addressApplication = addressApplication;
     }
 
-    // GET api/values
     [HttpGet("{zipCode}")]
-    public async Task<IActionResult> Get(string zipCode)
+    public async Task<ActionResult<AddressViewModel>> Get(string zipCode)
     {
-        var environmentVariable = Environment.GetEnvironmentVariable("dynamo_db");
-
-        Console.WriteLine(environmentVariable);
-
-        return Ok(await _addressService.GetAddress(zipCode));
+        return Ok(await _addressApplication.Get(zipCode));
     }
 }

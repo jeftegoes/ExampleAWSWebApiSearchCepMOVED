@@ -1,5 +1,5 @@
-using ExampleAWSWebApiSearchCep.Dtos;
 using ExampleAWSWebApiSearchCep.Interfaces;
+using ExampleAWSWebApiSearchCep.Models;
 using Newtonsoft.Json;
 
 namespace ExampleAWSWebApiSearchCep.Services
@@ -14,7 +14,7 @@ namespace ExampleAWSWebApiSearchCep.Services
 
         }
 
-        public async Task<EnderecoDto> GetAddress(string zipCode)
+        public async Task<Address> GetAddress(string zipCode)
         {
             Console.WriteLine("REQUEST - ZipCode: {0}", zipCode);
 
@@ -26,11 +26,11 @@ namespace ExampleAWSWebApiSearchCep.Services
 
                 var url = $"{zipCode}/{format}/";
 
-                var enderecoDto = JsonConvert.DeserializeObject<EnderecoDto>(await client.GetStringAsync(url));
+                var address = JsonConvert.DeserializeObject<Address>(await client.GetStringAsync(url));
 
-                Console.WriteLine("RESPONSE {0}", JsonConvert.SerializeObject(enderecoDto));
+                Console.WriteLine("RESPONSE {0}", JsonConvert.SerializeObject(address));
 
-                return enderecoDto;
+                return address;
             }
         }
     }

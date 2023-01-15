@@ -2,8 +2,8 @@ using ExampleAWSWebApiSearchCep.Models;
 
 namespace ExampleAWSWebApiSearchCep.Interfaces
 {
-    public interface IAddressService
+    public interface IAddressRepository
     {
-        Task<Address> GetAddress(string zipCode);
+        Task<Address> Get();
     }
 }
